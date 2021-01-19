@@ -9,6 +9,7 @@ import subdomain from "express-subdomain";
 import cors from "cors";
 
 import upload from "./routes/upload";
+import router from "./routes/root";
 
 app.use(cors());
 app.use(helmet());
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV != "development") {
   app.use(subdomain("images", express.static("./public/images")));
 }
 
-app.use("/upload", upload);
+app.use("/", router);
+app.use("/api", upload);
 
 export default app;

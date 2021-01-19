@@ -40,7 +40,7 @@ interface Image {
 }
 
 upload.post(
-  "/",
+  "/upload",
   uploadHandler.single("image"),
   async (req: Request, res: Response, next: NextFunction) => {
     if (!req.file) {
