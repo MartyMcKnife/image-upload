@@ -22,9 +22,9 @@ if (process.env.NODE_ENV != "development") {
   app.use(subdomain("images", express.static("./public/images")));
 }
 
-app.use(express.static("./../client/build"));
+app.use(express.static("./build"));
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "./../../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "./../build/index.html"));
 });
 
 app.use("/api", upload);
