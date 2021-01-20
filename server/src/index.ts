@@ -7,9 +7,9 @@ import morgan from "morgan";
 import bodyParser from "body-parser";
 import subdomain from "express-subdomain";
 import cors from "cors";
+import path from "path";
 
 import upload from "./routes/upload";
-import router from "./routes/root";
 
 app.use(cors());
 app.use(helmet());
@@ -22,7 +22,11 @@ if (process.env.NODE_ENV != "development") {
   app.use(subdomain("images", express.static("./public/images")));
 }
 
-app.use("/", router);
+app.use(express.static("./../client/build"));
+app.get("/", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "./../../client/build/index.html"));
+});
+
 app.use("/api", upload);
 
 export default app;
